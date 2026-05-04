@@ -1,0 +1,71 @@
+{
+  "app": { "name": "LATAKIA" },
+  "tabs": { "menu": "Menu", "orders": "Bestellingen", "admin": "Beheer" },
+  "menu": {
+    "title": "Menu",
+    "empty": "Geen items beschikbaar",
+    "unavailable": "Niet beschikbaar",
+    "loading": "Laden..."
+  },
+  "basket": {
+    "title": "Winkelmandje",
+    "empty": "Het winkelmandje is leeg",
+    "open": "Mandje openen",
+    "items_count_one": "{{count}} item",
+    "items_count_other": "{{count}} items",
+    "subtotal": "Subtotaal",
+    "total": "Totaal",
+    "confirm": "Bevestigen & Afdrukken",
+    "clear": "Leegmaken",
+    "remove": "Verwijderen",
+    "qty": "Aantal",
+    "order_number": "Bestelnummer"
+  },
+  "order": {
+    "confirmed_title": "Bestelling bevestigd",
+    "confirmed_body": "Bestelling #{{number}} is opgeslagen en afgedrukt.",
+    "ok": "OK",
+    "saving": "Opslaan...",
+    "save_error": "Opslaan mislukt: {{error}}"
+  },
+  "orders": {
+    "title": "Bestelgeschiedenis",
+    "empty": "Geen bestellingen",
+    "filter_date": "Filter op datum",
+    "clear_filter": "Filter wissen",
+    "reprint": "Opnieuw afdrukken",
+    "reprinted": "Opnieuw verzonden naar printer",
+    "details": "Details"
+  },
+  "admin": {
+    "title": "Beheer",
+    "pin_prompt": "Voer pincode in",
+    "pin_wrong": "Onjuiste pincode",
+    "logout": "Uitloggen",
+    "categories": "Categorieën",
+    "items": "Menu-items",
+    "history": "Geschiedenis",
+    "revenue": "Omzet",
+    "revenue_today": "Omzet vandaag",
+    "add_category": "Categorie toevoegen",
+    "add_item": "Item toevoegen",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "delete_confirm": "Weet je het zeker?",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "name_ar": "Naam (Arabisch)",
+    "name_nl": "Naam (Nederlands)",
+    "price": "Prijs",
+    "category": "Categorie",
+    "available": "Beschikbaar"
+  },
+  "common": {
+    "language": "اللغة / Taal",
+    "switch_language": "Taal wisselen",
+    "yes": "Ja",
+    "no": "Nee",
+    "back": "Terug",
+    "error": "Fout"
+  }
+}

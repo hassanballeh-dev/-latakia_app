@@ -1,0 +1,71 @@
+{
+  "app": { "name": "اللاذقية" },
+  "tabs": { "menu": "القائمة", "orders": "الطلبات", "admin": "الإدارة" },
+  "menu": {
+    "title": "القائمة",
+    "empty": "لا توجد أصناف متاحة",
+    "unavailable": "غير متاح",
+    "loading": "جارٍ التحميل..."
+  },
+  "basket": {
+    "title": "السلة",
+    "empty": "السلة فارغة",
+    "open": "فتح السلة",
+    "items_count_one": "صنف واحد",
+    "items_count_other": "{{count}} أصناف",
+    "subtotal": "المجموع الفرعي",
+    "total": "الإجمالي",
+    "confirm": "تأكيد وطباعة",
+    "clear": "إفراغ",
+    "remove": "حذف",
+    "qty": "الكمية",
+    "order_number": "رقم الطلب"
+  },
+  "order": {
+    "confirmed_title": "تم تأكيد الطلب",
+    "confirmed_body": "تم حفظ الطلب رقم #{{number}} وطباعته.",
+    "ok": "حسناً",
+    "saving": "جارٍ الحفظ...",
+    "save_error": "فشل الحفظ: {{error}}"
+  },
+  "orders": {
+    "title": "سجل الطلبات",
+    "empty": "لا توجد طلبات",
+    "filter_date": "تصفية حسب التاريخ",
+    "clear_filter": "مسح التصفية",
+    "reprint": "إعادة الطباعة",
+    "reprinted": "تم إرساله إلى الطابعة من جديد",
+    "details": "التفاصيل"
+  },
+  "admin": {
+    "title": "الإدارة",
+    "pin_prompt": "أدخل رمز PIN",
+    "pin_wrong": "رمز غير صحيح",
+    "logout": "تسجيل الخروج",
+    "categories": "الفئات",
+    "items": "أصناف القائمة",
+    "history": "السجل",
+    "revenue": "الإيرادات",
+    "revenue_today": "إيرادات اليوم",
+    "add_category": "إضافة فئة",
+    "add_item": "إضافة صنف",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "delete_confirm": "هل أنت متأكد؟",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "name_ar": "الاسم (بالعربية)",
+    "name_nl": "الاسم (بالهولندية)",
+    "price": "السعر",
+    "category": "الفئة",
+    "available": "متاح"
+  },
+  "common": {
+    "language": "اللغة / Taal",
+    "switch_language": "تبديل اللغة",
+    "yes": "نعم",
+    "no": "لا",
+    "back": "رجوع",
+    "error": "خطأ"
+  }
+}
