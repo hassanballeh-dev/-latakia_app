@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { localizedName, type Lang } from '@/lib/i18n';
 import type { Category } from '@/lib/supabase';
+import { theme } from '@/lib/theme';
 
 type Props = {
   categories: Category[];
@@ -15,36 +16,48 @@ export function CategoryPills({ categories, selectedId, onSelect }: Props) {
   const lang = (i18n.language as Lang) ?? 'nl';
 
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.row}>
-      {categories.map((c) => {
-        const active = c.id === selectedId;
-        return (
-          <Pressable
-            key={c.id}
-            onPress={() => onSelect(c.id)}
-            style={[styles.pill, active && styles.pillActive]}>
-            <Text style={[styles.label, active && styles.labelActive]}>
-              {localizedName(c, lang)}
-            </Text>
-          </Pressable>
-        );
-      })}
-    </ScrollView>
+    <View style={styles.bar}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.row}>
+        {categories.map((c) => {
+          const active = c.id === selectedId;
+          return (
+            <Pressable
+              key={c.id}
+              onPress={() => onSelect(c.id)}
+              style={[styles.pill, active && styles.pillActive]}>
+              <Text style={[styles.label, active && styles.labelActive]}>
+                {localizedName(c, lang)}
+              </Text>
+            </Pressable>
+          );
+        })}
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  row: { paddingHorizontal: 12, paddingVertical: 12, gap: 8 },
-  pill: {
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 999,
-    backgroundColor: '#eee',
+  bar: {
+    backgroundColor: theme.colors.card,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.border,
   },
-  pillActive: { backgroundColor: '#0a7ea4' },
-  label: { fontSize: 16, fontWeight: '600', color: '#333' },
+  row: { paddingHorizontal: 12, paddingVertical: 14, gap: 10 },
+  pill: {
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: theme.radius.pill,
+    backgroundColor: theme.colors.primarySoft,
+    borderWidth: 1,
+    borderColor: 'transparent',
+  },
+  pillActive: {
+    backgroundColor: theme.colors.primary,
+    borderColor: theme.colors.primaryDark,
+  },
+  label: { fontSize: 16, fontWeight: '700', color: theme.colors.primaryDark },
   labelActive: { color: '#fff' },
 });

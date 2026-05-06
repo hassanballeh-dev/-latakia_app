@@ -24,7 +24,8 @@ export function LanguageToggle() {
   };
 
   return (
-    <Pressable onPress={onPress} style={styles.btn} hitSlop={8}>
+    <Pressable onPress={onPress} style={({ pressed }) => [styles.btn, pressed && styles.btnPressed]} hitSlop={8}>
+      <Text style={styles.icon}>🌐</Text>
       <Text style={styles.label}>{next === 'ar' ? 'العربية' : 'Nederlands'}</Text>
     </Pressable>
   );
@@ -32,11 +33,18 @@ export function LanguageToggle() {
 
 const styles = StyleSheet.create({
   btn: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    marginRight: 8,
-    borderRadius: 6,
-    backgroundColor: 'rgba(0,0,0,0.06)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    marginRight: 12,
+    borderRadius: 999,
+    backgroundColor: '#fbe9e3', // theme primarySoft
+    borderWidth: 1,
+    borderColor: '#c8553d', // theme primary
   },
-  label: { fontSize: 14, fontWeight: '600' },
+  btnPressed: { backgroundColor: '#c8553d' },
+  icon: { fontSize: 14 },
+  label: { fontSize: 14, fontWeight: '700', color: '#a04230' /* primaryDark */ },
 });

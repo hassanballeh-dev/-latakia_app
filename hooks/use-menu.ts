@@ -1,8 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useState } from 'react';
 
 import { fetchCategories, fetchMenuItems } from '@/lib/db';
 import type { Category, MenuItem } from '@/lib/supabase';
 
+// Refetches whenever the screen comes back into focus, so admin edits are
+// reflected the next time the waiter opens the Menu tab.
 export function useMenu() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [items, setItems] = useState<MenuItem[]>([]);
@@ -23,9 +26,11 @@ export function useMenu() {
     }
   }, []);
 
-  useEffect(() => {
-    reload();
-  }, [reload]);
+  useFocusEffect(
+    useCallback(() => {
+      reload();
+    }, [reload]),
+  );
 
   return { categories, items, loading, error, reload };
 }

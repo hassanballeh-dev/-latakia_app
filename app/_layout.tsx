@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import 'react-native-reanimated';
 
+import { useAdminAuth } from '@/lib/admin-auth';
 import { initI18n, loadStoredLanguage } from '@/lib/i18n';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -20,6 +21,7 @@ export default function RootLayout() {
     (async () => {
       const lang = await loadStoredLanguage();
       initI18n(lang);
+      await useAdminAuth.getState().init();
       setReady(true);
     })();
   }, []);

@@ -15,7 +15,12 @@ export const restaurantConfig = {
 };
 
 export const APP_CONFIG = {
-  defaultLanguage: 'nl' as 'nl' | 'ar',
+  // App UI defaults to Arabic on first launch. Once the user picks a
+  // language from the header toggle, that choice is persisted.
+  defaultLanguage: 'ar' as 'nl' | 'ar',
+  // Default language for the printed invoice (separate from the app UI —
+  // most customers in NL want a Dutch receipt regardless of waiter UI).
+  defaultInvoiceLanguage: 'nl' as 'nl' | 'ar',
   // Read from EXPO_PUBLIC_ADMIN_PIN at build time. Inlined into the bundle.
   adminPin: process.env.EXPO_PUBLIC_ADMIN_PIN ?? '1234',
 };

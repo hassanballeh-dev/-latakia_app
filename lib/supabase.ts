@@ -40,11 +40,19 @@ export type MenuItem = {
   sort_order: number;
 };
 
+export type OrderType = 'dine_in' | 'takeaway';
+export type InvoiceLang = 'ar' | 'nl';
+
 export type Order = {
   id: string;
   order_date: string; // 'YYYY-MM-DD'
   daily_number: number;
   status: 'confirmed' | 'cancelled';
+  order_type: OrderType;
+  invoice_lang: InvoiceLang;
+  subtotal: number;
+  tax_rate: number;   // e.g. 0.12 or 0.06
+  tax_amount: number;
   total: number;
   created_at: string;
 };

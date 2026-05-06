@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { formatPrice, localizedName, type Lang } from '@/lib/i18n';
 import type { MenuItem } from '@/lib/supabase';
+import { theme } from '@/lib/theme';
 
 type Props = {
   item: MenuItem;
@@ -38,24 +39,28 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     minWidth: 160,
-    margin: 6,
-    padding: 16,
-    borderRadius: 12,
-    backgroundColor: '#fff',
+    margin: 8,
+    padding: 18,
+    borderRadius: theme.radius.lg,
+    backgroundColor: theme.colors.card,
     borderWidth: 1,
-    borderColor: '#e2e2e2',
-    minHeight: 110,
+    borderColor: theme.colors.border,
+    minHeight: 120,
     justifyContent: 'space-between',
+    ...theme.shadow.card,
   },
-  cardPressed: { backgroundColor: '#f0f7fb', borderColor: '#0a7ea4' },
+  cardPressed: {
+    backgroundColor: theme.colors.primarySoft,
+    borderColor: theme.colors.primary,
+  },
   cardDisabled: { opacity: 0.5 },
-  name: { fontSize: 18, fontWeight: '600' },
+  name: { fontSize: 18, fontWeight: '700', color: theme.colors.text },
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 12,
+    marginTop: 14,
   },
-  price: { fontSize: 18, fontWeight: '700', color: '#0a7ea4' },
-  unavailable: { fontSize: 12, color: '#a33', fontWeight: '600' },
+  price: { fontSize: 22, fontWeight: '800', color: theme.colors.primary },
+  unavailable: { fontSize: 12, color: theme.colors.danger, fontWeight: '700' },
 });
