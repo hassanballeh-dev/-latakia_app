@@ -5,13 +5,15 @@ const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  // Fail loud at startup rather than getting confusing 401s later.
-  console.warn(
-    '[supabase] EXPO_PUBLIC_SUPABASE_URL / EXPO_PUBLIC_SUPABASE_ANON_KEY missing. Copy .env.example to .env.',
+  // Throw a readable message instead of letting createClient throw deep inside
+  // supabase-js. The root layout's ErrorBoundary then shows it on screen so a
+  // misconfigured EAS build doesn't go black.
+  throw new Error(
+    'Supabase env vars missing. Set EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY in .env (local) and via `eas env:push preview --path ./.env` (cloud builds).',
   );
 }
 
-export const supabase = createClient(supabaseUrl ?? '', supabaseAnonKey ?? '', {
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     storage: AsyncStorage,
     // We don't use Supabase Auth at all in this app.

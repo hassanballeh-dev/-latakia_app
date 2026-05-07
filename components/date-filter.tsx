@@ -13,27 +13,45 @@ function todayIso(): string {
   return `${y}-${m}-${day}`;
 }
 
+export type DateRange = { from: string | null; to: string | null };
+
 type Props = {
-  value: string | null; // 'YYYY-MM-DD' or null = all
-  onChange: (value: string | null) => void;
+  value: DateRange;
+  onChange: (value: DateRange) => void;
 };
 
+// "Alle / Vandaag" quick chips + a Van / Tot range picker. The picker pair
+// is the source of truth — chips are shortcuts that set both ends.
 export function DateFilter({ value, onChange }: Props) {
   const { t } = useTranslation();
   const today = todayIso();
-  const isAll = value === null;
-  const isToday = value === today;
-  const isCustom = !isAll && !isToday;
+  const isAll = value.from === null && value.to === null;
+  const isToday = value.from === today && value.to === today;
 
   return (
     <View style={styles.bar}>
-      <Chip label={t('orders.all')} active={isAll} onPress={() => onChange(null)} />
-      <Chip label={t('orders.today')} active={isToday} onPress={() => onChange(today)} />
-      {/* Always show the actual selected date in the picker so the waiter can
-          see what's filtered. The chip + outline highlight indicate which
-          shortcut applies. */}
-      <View style={isCustom ? styles.activeWrap : undefined}>
-        <DatePicker value={value} onChange={onChange} placeholder={t('orders.pick_date')} />
+      <View style={styles.chipsRow}>
+        <Chip label={t('orders.all')} active={isAll} onPress={() => onChange({ from: null, to: null })} />
+        <Chip label={t('orders.today')} active={isToday} onPress={() => onChange({ from: today, to: today })} />
+      </View>
+
+      <View style={styles.rangeRow}>
+        <View style={styles.rangeItem}>
+          <Text style={styles.rangeLabel}>{t('orders.from')}</Text>
+          <DatePicker
+            value={value.from}
+            onChange={(from) => onChange({ ...value, from })}
+            placeholder={t('orders.pick_date')}
+          />
+        </View>
+        <View style={styles.rangeItem}>
+          <Text style={styles.rangeLabel}>{t('orders.to')}</Text>
+          <DatePicker
+            value={value.to}
+            onChange={(to) => onChange({ ...value, to })}
+            placeholder={t('orders.pick_date')}
+          />
+        </View>
       </View>
     </View>
   );
@@ -41,9 +59,7 @@ export function DateFilter({ value, onChange }: Props) {
 
 function Chip({ label, active, onPress }: { label: string; active: boolean; onPress: () => void }) {
   return (
-    <Pressable
-      onPress={onPress}
-      style={[styles.chip, active && styles.chipActive]}>
+    <Pressable onPress={onPress} style={[styles.chip, active && styles.chipActive]}>
       <Text style={[styles.chipLabel, active && styles.chipLabelActive]}>{label}</Text>
     </Pressable>
   );
@@ -51,15 +67,14 @@ function Chip({ label, active, onPress }: { label: string; active: boolean; onPr
 
 const styles = StyleSheet.create({
   bar: {
-    flexDirection: 'row',
-    gap: 10,
-    paddingHorizontal: 14,
-    paddingVertical: 12,
     backgroundColor: theme.colors.card,
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.border,
-    alignItems: 'center',
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    gap: 10,
   },
+  chipsRow: { flexDirection: 'row', gap: 10 },
   chip: {
     paddingHorizontal: 14,
     paddingVertical: 10,
@@ -69,5 +84,7 @@ const styles = StyleSheet.create({
   chipActive: { backgroundColor: theme.colors.primary },
   chipLabel: { fontSize: 14, fontWeight: '700', color: theme.colors.primaryDark },
   chipLabelActive: { color: '#fff' },
-  activeWrap: { borderRadius: theme.radius.pill, borderWidth: 2, borderColor: theme.colors.primary },
+  rangeRow: { flexDirection: 'row', gap: 10, alignItems: 'center', flexWrap: 'wrap' },
+  rangeItem: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  rangeLabel: { fontSize: 13, fontWeight: '700', color: theme.colors.muted, textTransform: 'uppercase' },
 });

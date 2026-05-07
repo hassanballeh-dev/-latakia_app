@@ -41,6 +41,8 @@
     "all": "Alle",
     "today": "Vandaag",
     "pick_date": "Datum",
+    "from": "Van",
+    "to": "Tot",
     "filter_date": "Filter op datum",
     "clear_filter": "Filter wissen",
     "reprint": "Opnieuw afdrukken",

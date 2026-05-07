@@ -4,7 +4,9 @@ import { useCallback, useState } from 'react';
 import { fetchOrder, fetchOrderItems, fetchOrders } from '@/lib/db';
 import type { Order, OrderItem } from '@/lib/supabase';
 
-export function useOrders(dateFilter: string | null) {
+export type DateRange = { from: string | null; to: string | null };
+
+export function useOrders(range: DateRange) {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -13,16 +15,19 @@ export function useOrders(dateFilter: string | null) {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchOrders(dateFilter ? { date: dateFilter } : undefined);
+      const data = await fetchOrders({
+        dateFrom: range.from ?? undefined,
+        dateTo: range.to ?? undefined,
+      });
       setOrders(data);
     } catch (e: any) {
       setError(e?.message ?? String(e));
     } finally {
       setLoading(false);
     }
-  }, [dateFilter]);
+  }, [range.from, range.to]);
 
-  // Refetch each time the screen comes back into focus (e.g. after confirming a new order).
+  // Refetch each time the screen comes back into focus.
   useFocusEffect(
     useCallback(() => {
       reload();

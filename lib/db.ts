@@ -43,9 +43,15 @@ export async function fetchOrder(id: string): Promise<Order | null> {
   return (data as Order) ?? null;
 }
 
-export async function fetchOrders(opts?: { date?: string }): Promise<Order[]> {
+export async function fetchOrders(opts?: {
+  date?: string;       // single day (YYYY-MM-DD)
+  dateFrom?: string;   // range start, inclusive
+  dateTo?: string;     // range end, inclusive
+}): Promise<Order[]> {
   let q = supabase.from('orders').select('*').order('created_at', { ascending: false });
   if (opts?.date) q = q.eq('order_date', opts.date);
+  if (opts?.dateFrom) q = q.gte('order_date', opts.dateFrom);
+  if (opts?.dateTo) q = q.lte('order_date', opts.dateTo);
   const { data, error } = await q;
   if (error) throw error;
   return data ?? [];

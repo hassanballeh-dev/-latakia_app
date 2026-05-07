@@ -20,7 +20,7 @@ import { PinGate } from '@/components/admin/pin-gate';
 import { DateFilter } from '@/components/date-filter';
 import { OrderRow } from '@/components/order-row';
 import { useMenu } from '@/hooks/use-menu';
-import { useOrders } from '@/hooks/use-orders';
+import { useOrders, type DateRange } from '@/hooks/use-orders';
 import { useAdminAuth } from '@/lib/admin-auth';
 import { deleteCategory, deleteMenuItem, updateMenuItem } from '@/lib/db';
 import { confirmAction, showInfo } from '@/lib/feedback';
@@ -271,8 +271,9 @@ function OrdersSection() {
   const { t, i18n } = useTranslation();
   const lang = (i18n.language as Lang) ?? 'nl';
   const today = todayIso();
-  const [dateFilter, setDateFilter] = useState<string | null>(today);
-  const { orders, loading, reload } = useOrders(dateFilter);
+  // Default to today's revenue. Owner can broaden the range from the UI.
+  const [range, setRange] = useState<DateRange>({ from: today, to: today });
+  const { orders, loading, reload } = useOrders(range);
 
   const revenue = useMemo(
     () => orders.reduce((sum, o) => sum + Number(o.total), 0),
@@ -281,7 +282,7 @@ function OrdersSection() {
 
   return (
     <View style={styles.sectionContainer}>
-      <DateFilter value={dateFilter} onChange={setDateFilter} />
+      <DateFilter value={range} onChange={setRange} />
 
       <View style={styles.revenueCard}>
         <Text style={styles.revenueLabel}>{t('admin.revenue_total')}</Text>

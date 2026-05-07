@@ -4,18 +4,18 @@ import { ActivityIndicator, FlatList, Platform, RefreshControl, StyleSheet, Text
 
 import { DateFilter } from '@/components/date-filter';
 import { OrderRow } from '@/components/order-row';
-import { useOrders } from '@/hooks/use-orders';
+import { useOrders, type DateRange } from '@/hooks/use-orders';
 import { theme } from '@/lib/theme';
 
 export default function OrdersScreen() {
   const { t } = useTranslation();
-  const [dateFilter, setDateFilter] = useState<string | null>(null);
-  const { orders, loading, error, reload } = useOrders(dateFilter);
+  const [range, setRange] = useState<DateRange>({ from: null, to: null });
+  const { orders, loading, error, reload } = useOrders(range);
 
   return (
     <View style={styles.container}>
       <View style={styles.maxWidth}>
-        <DateFilter value={dateFilter} onChange={setDateFilter} />
+        <DateFilter value={range} onChange={setRange} />
         {error ? (
           <View style={styles.center}>
             <Text style={styles.error}>{t('common.error')}</Text>

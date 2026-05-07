@@ -49,8 +49,8 @@ export default function RootLayout() {
   if (!ready) {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator color="#c8553d" />
         <Text style={styles.loadingText}>LATAKIA</Text>
+        <ActivityIndicator color="#c8553d" size="small" />
       </View>
     );
   }
@@ -70,8 +70,8 @@ export default function RootLayout() {
 }
 
 const styles = StyleSheet.create({
-  loading: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#faf6f0', gap: 12 },
-  loadingText: { color: '#c8553d', fontSize: 18, fontWeight: '800', letterSpacing: 2 },
+  loading: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#faf6f0', gap: 24 },
+  loadingText: { color: '#c8553d', fontSize: 42, fontWeight: '900', letterSpacing: 6 },
   errBox: { flex: 1, backgroundColor: '#fff', padding: 16, paddingTop: 60 },
   errTitle: { fontSize: 22, fontWeight: '800', color: '#a8341c', marginBottom: 4 },
   errSubtitle: { fontSize: 14, color: '#666', marginBottom: 12 },
